@@ -1,0 +1,11 @@
+.NavegatioItem {
+  padding: 0.6em 0.2em;
+  font-size: 20px;
+  text-decoration: none;
+  color: black;
+}
+.NavegatioItem:hover {
+  background-color: #71e03d5b;
+  cursor: pointer;
+  box-shadow: 0 3px 0 rgb(55, 90, 33);
+}
