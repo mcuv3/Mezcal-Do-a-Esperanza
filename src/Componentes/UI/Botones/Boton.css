@@ -1,0 +1,22 @@
+.Boton {
+  padding: 10px 15px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform ease 0.5s;
+}
+.Boton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.438);
+}
+
+.logeate {
+  border: 0.5px solid black;
+  background-color: rgba(255, 255, 255, 0);
+  color: black;
+}
+
+.registrate {
+  background-color: black;
+  color: white;
+  margin-right: 0.5em;
+}

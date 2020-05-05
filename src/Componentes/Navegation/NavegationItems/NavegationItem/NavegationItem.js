@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const NavegationItem = (props) => {
   return (
-    <NavLink className={classes.NavegatioItem} to="/">
+    <NavLink className={classes.NavegatioItem} to={props.path}>
       {props.children}
     </NavLink>
   );

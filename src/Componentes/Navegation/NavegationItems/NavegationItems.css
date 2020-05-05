@@ -1,0 +1,7 @@
+@media (max-width: 500px) {
+  .NavigationItems {
+    display: flex;
+    flex-direction: column;
+    padding-inline-start: 0px;
+  }
+}

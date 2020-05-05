@@ -1,0 +1,1 @@
+export { onSelectProductHandler } from "./Catalogo";

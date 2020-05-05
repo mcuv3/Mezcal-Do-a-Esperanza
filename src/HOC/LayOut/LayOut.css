@@ -1,3 +1,6 @@
 .Contenedor {
   box-sizing: border-box;
 }
+.main {
+  margin-top: 3em;
+}

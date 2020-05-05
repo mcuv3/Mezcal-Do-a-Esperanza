@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import classes from "./LayOut.css";
 import ToolBar from "../../Componentes/Navegation/ToolBar/ToolBar";
 import SideDrawer from "../../Componentes/Navegation/SideDrawer/SideDrawer";
+import Footer from "../../Componentes/Footer/Footer";
 
 export class LayOut extends Component {
   state = {
@@ -18,8 +19,8 @@ export class LayOut extends Component {
           show={this.state.showSideDrawer}
           click={this.toggleShowSideDrawer}
         />
-        <main>{this.props.children}</main>
-        <footer></footer>
+        <main className={classes.main}>{this.props.children}</main>
+        <Footer />
       </div>
     );
   }
