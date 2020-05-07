@@ -2,10 +2,12 @@
   padding: 10px 15px;
   text-transform: uppercase;
   text-decoration: none;
+  font-size: 15px;
   transition: transform ease 0.5s;
 }
 .Boton:hover {
-  transform: scale(1.05);
+  cursor: pointer;
+  transform: scale(1.02);
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.438);
 }
 

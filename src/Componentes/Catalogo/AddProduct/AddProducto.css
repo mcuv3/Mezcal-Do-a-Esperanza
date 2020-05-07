@@ -1,0 +1,16 @@
+.AddProduct {
+  width: 30%;
+  margin: auto;
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 3px #eee;
+  padding: 1em 2em;
+}
+.Inputs > input,
+textarea {
+  padding: 5px 5px;
+  border: 1px solid black;
+  width: 100%;
+  resize: none;
+  margin-bottom: 1em;
+  box-sizing: border-box;
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import back from "../../Assets/back.jpg";
 import classes from "./Presentacion.css";
-import Boton from "../UI/Botones/Boton";
+import Boton from "../UI/Botones/BotonNav";
 
 const Presentacion = () => {
   return (

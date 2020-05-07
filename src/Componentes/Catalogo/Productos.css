@@ -1,40 +1,29 @@
 .Productos {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-
   box-sizing: border-box;
   gap: 1em;
-
   width: 100%;
 }
 
 .Contenedor {
-  width: 75%;
+  width: 750px;
   margin: 2em auto;
 }
 
-@media (max-width: 950px) {
+@media (max-width: 860px) {
   .Productos {
     grid-template-columns: 1fr 1fr;
   }
   .Contenedor {
-    width: 75%;
+    width: 475px;
   }
 }
 @media (max-width: 600px) {
   .Productos {
     grid-template-columns: 1fr;
   }
-}
-
-@media (min-width: 1200px) {
   .Contenedor {
-    width: 60%;
-  }
-}
-
-@media (min-width: 1500px) {
-  .Contenedor {
-    width: 45%;
+    width: 300px;
   }
 }

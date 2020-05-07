@@ -6,106 +6,50 @@ import * as actions from "../../Store/Actions/Index";
 
 export class Catalogo extends Component {
   state = {
-    Productos: {
-      Mezcales: [
-        {
-          id: 1,
-          nombre: "Botella de Mezacal",
-          descripcion: "Una la del mchuga de maguey que están ",
-          tipo: "Mezacal de Gusano",
-          precio: 250,
-        },
-        {
-          id: 2,
-          nombre: "Botella de Mezacal",
-          descripcion: "Esta es una botella muy rica de mezcal",
-          tipo: "Mezacal de Gusano",
-          precio: 250,
-        },
-        {
-          id: 3,
-          nombre: "Botella de Mezacal",
-          descripcion: "Esta es una botella muy rica de mezcal",
-          tipo: "Mezacal de Gusano",
-          precio: 250,
-        },
-        {
-          id: 4,
-          nombre: "Botella de Mezacal",
-          descripcion: "Esta es una botella muy rica de mezcal",
-          tipo: "Mezacal de Gusano",
-          precio: 250,
-        },
-        {
-          id: 5,
-          nombre: "Botella de Mezacal",
-          descripcion: "Esta es una botella muy rica de mezcal",
-          tipo: "Mezacal de Gusano",
-          precio: 250,
-        },
-        {
-          id: 6,
-          nombre: "Botella de Mezacal",
-          descripcion: "Esta es una botella muy rica de mezcal",
-          tipo: "Mezacal de Gusano",
-          precio: 250,
-        },
-        {
-          id: 7,
-          nombre: "Botella de Mezacal",
-          descripcion: "Esta es una botella muy rica de mezcal",
-          tipo: "Mezacal de Gusano",
-          precio: 250,
-        },
-        {
-          id: 8,
-          nombre: "Botella de Mezacal",
-          descripcion: "Esta es una botella muy rica de mezcal",
-          tipo: "Mezacal de Gusano",
-          precio: 250,
-        },
-        {
-          id: 9,
-          nombre: "Botella de Mezacal",
-          descripcion: "Esta es una botella muy rica de mezcal",
-          tipo: "Mezacal de Gusano",
-          precio: 250,
-        },
-      ],
-      Salsas: [
-        {
-          id: 1,
-          nombre: "Salsa en Polvo de Chapulin",
-          descripcion: "Esta es una salsa muy rica de chapulin",
-          tipo: "Picante",
-          precio: 150,
-        },
-      ],
-    },
     idSelected: null,
   };
+  componentDidMount() {
+    this.props.fetchProduct();
+  }
 
-  selectProduct = (id) => {
-    this.props.onSelectProduct(id);
-    this.props.history.push("/productos/" + id);
+  selectProduct = (product) => {
+    this.props.onSelectProduct(product);
+    this.props.history.push("/catalogo/" + product.id);
+  };
+
+  addProductToCart = (product) => {
+    this.props.onAddProductToCart({ id: product.id, cantidad: 1 });
+    this.props.history.push("/shop-car");
+    console.log(product);
   };
 
   render() {
     console.log(this.state.idSelected);
     return (
-      <div>
+      <React.Fragment>
         <ProductosControl />
         <Productos
-          productos={this.state.Productos.Mezcales}
+          productos={this.props.products}
           selected={this.selectProduct}
+          addToCart={this.addProductToCart}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    onSelectProduct: (id) => dispatch(actions.onSelectProductHandler(id)),
+    products: state.catalogo.products,
   };
 };
-export default connect(null, mapDispatchToProps)(Catalogo);
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSelectProduct: (product) =>
+      dispatch(actions.onSelectProductHandler(product)),
+    fetchProduct: () => dispatch(actions.fetchProductsFromDB()),
+    onAddProductToCart: (product) =>
+      dispatch(actions.addProductToCart(product)),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Catalogo);

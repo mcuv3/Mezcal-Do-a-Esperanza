@@ -13,7 +13,7 @@ export class LayOut extends Component {
 
   render() {
     return (
-      <div className={classes.Conentenedor}>
+      <div className={classes.Contenedor}>
         <ToolBar click={this.toggleShowSideDrawer} />
         <SideDrawer
           show={this.state.showSideDrawer}

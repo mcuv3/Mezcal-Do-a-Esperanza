@@ -8,7 +8,7 @@ const NavigationItems = (props) => {
       <NavigationItem path="/catalogo"> Catalogo</NavigationItem>
       <NavigationItem path="/about"> Acerca de </NavigationItem>
       <NavigationItem path="/ubicacion"> Ubicacion </NavigationItem>
-      <NavigationItem path="/carrito"> Carrito </NavigationItem>
+      <NavigationItem path="/shop-car"> Carrito </NavigationItem>
     </ul>
   );
 };

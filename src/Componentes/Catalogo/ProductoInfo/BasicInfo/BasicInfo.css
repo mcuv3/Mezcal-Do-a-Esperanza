@@ -1,0 +1,50 @@
+.BasicInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.Texto {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
+.Cantidad {
+  display: flex;
+  margin-bottom: 1em;
+}
+.Cantidad > p {
+  margin: 0 0.5em;
+  font-size: 25px;
+  font-weight: bold;
+  font-style: italic;
+}
+.Detalles {
+  margin: 0;
+  line-height: 4px;
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.445);
+}
+
+.Catalogo {
+  flex-direction: column;
+  justify-content: center;
+  border: solid 1px #ccc;
+  box-shadow: 0 1px 2px #eee;
+  transition: transform ease 0.5s;
+  height: 600px;
+}
+.Catalogo:hover {
+  cursor: pointer;
+  transform: scale(1.025);
+}
+
+@media (max-width: 500px) {
+  .BasicInfo {
+    flex-direction: column;
+  }
+}

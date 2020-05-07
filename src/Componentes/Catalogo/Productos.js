@@ -10,10 +10,9 @@ const Productos = (props) => {
           return (
             <Producto
               key={producto.id}
-              titulo={producto.nombre}
-              descripcion={producto.descripcion}
-              precio={producto.precio}
-              selected={() => props.selected(producto.id)}
+              producto={producto}
+              selected={() => props.selected(producto)}
+              addToCart={() => props.addToCart(producto)}
             />
           );
         })}
