@@ -7,7 +7,7 @@ function ShopProducts(props) {
       {props.productsToShop.map((product) => {
         return (
           <ShopItem
-            key={product.id}
+            key={product.id + "Cart"}
             productToShop={product}
             cantidad={product.cantidad}
           />

@@ -3,6 +3,7 @@ import * as actionTypes from "../Actions/ActionTypes";
 const initialState = {
   productSelected: [],
   products: [],
+  showProductInfo: false,
   error: false,
 };
 
@@ -12,11 +13,13 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         productSelected: action.productSelected,
+        showProductInfo: true,
       };
     case actionTypes.UNSELECT_PRODUCT:
       return {
         ...state,
         productSelected: "-",
+        showProductInfo: false,
       };
     case actionTypes.FETCH_PRODUCTS_SUCCESS:
       return {

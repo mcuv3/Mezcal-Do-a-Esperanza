@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import classes from "./ProductoInfo.css";
 import { connect } from "react-redux";
 import * as actions from "../../../Store/Actions/Index";
-import BasicInfo from "./BasicInfo/BasicInfo";
+import BasicInfo from "../../../Componentes/Catalogo/BasicInfo/BasicInfo";
 
 class ProductoInfo extends Component {
   state = {
@@ -10,23 +10,21 @@ class ProductoInfo extends Component {
   };
 
   componentDidMount() {
-    if (this.props.selectedProduct.length === 0) {
-      this.props.fetchProduct(this.props.history.location.pathname.slice(10));
-      this.props.history.push(
-        "/catalogo/" + this.props.history.location.pathname.slice(10)
+    if (this.props.selectedProduct) {
+      console.log("LInk pasado alv");
+      localStorage.setItem(
+        "productSelected",
+        JSON.stringify(this.props.selectedProduct)
       );
+    } else {
+      console.log("LInk pasado alv");
     }
   }
   componentWillUnmount() {
+    localStorage.removeItem("productSelected");
     this.props.onUnSelectProduct();
   }
-  reRenderProduct = () => {
-    const product = this.props.products.filter(
-      (p) => p.id === this.props.history.location.pathname.slice(10)
-    );
-    this.props.onSelectedProduct(product);
-    this.setState({ isProduct: true });
-  };
+
   changeCantidad = (isAdd) => {
     this.setState({
       cantidad: isAdd
@@ -46,6 +44,7 @@ class ProductoInfo extends Component {
   render() {
     return (
       <div className={classes.ProductInfo}>
+        <div className={classes.BackButton}>Back</div>
         <BasicInfo
           imageWidth="300px"
           imageHeight="300px"

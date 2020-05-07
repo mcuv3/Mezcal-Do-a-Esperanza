@@ -7,6 +7,7 @@ import * as actions from "../../Store/Actions/Index";
 export class ShopCar extends Component {
   componentDidMount() {
     this.props.onFetchProductsInCart(this.props.productsCatalgo);
+    console.log(this.props.productsCatalgo);
   }
 
   render() {

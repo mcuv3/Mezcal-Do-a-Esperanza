@@ -2,14 +2,17 @@ import React, { Component } from "react";
 import Productos from "../../Componentes/Catalogo/Productos";
 import ProductosControl from "../../Componentes/Catalogo/ProdutosControl/ProductosControl";
 import { connect } from "react-redux";
+import { Route } from "react-router-dom";
+import ProductInfo from "./ProductoInfo/ProductoInfo";
 import * as actions from "../../Store/Actions/Index";
 
 export class Catalogo extends Component {
-  state = {
-    idSelected: null,
-  };
   componentDidMount() {
     this.props.fetchProduct();
+    if (localStorage.getItem("productSelected") !== null) {
+      const productSelected = localStorage.getItem("productSelected");
+      this.selectProduct(JSON.parse(productSelected));
+    }
   }
 
   selectProduct = (product) => {
@@ -24,8 +27,9 @@ export class Catalogo extends Component {
   };
 
   render() {
-    console.log(this.state.idSelected);
-    return (
+    console.log(this.props.idSelected);
+
+    let showProducts = (
       <React.Fragment>
         <ProductosControl />
         <Productos
@@ -35,11 +39,22 @@ export class Catalogo extends Component {
         />
       </React.Fragment>
     );
+    if (this.props.showProductInfo) {
+      showProducts = (
+        <Route
+          path={this.props.match.path + "/" + this.props.idSelected}
+          component={ProductInfo}
+        />
+      );
+    }
+    return showProducts;
   }
 }
 const mapStateToProps = (state) => {
   return {
     products: state.catalogo.products,
+    idSelected: state.catalogo.productSelected.id,
+    showProductInfo: state.catalogo.showProductInfo,
   };
 };
 

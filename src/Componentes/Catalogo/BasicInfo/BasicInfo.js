@@ -1,8 +1,8 @@
 import React from "react";
 import classes from "./BasicInfo.css";
-import Imagen from "../../../UI/Image/Image";
-import ImgProducto from "../../../../Assets/producto.png";
-import Boton from "../../../UI/Botones/Boton";
+import Imagen from "../../UI/Image/Image";
+import ImgProducto from "../../../Assets/producto.png";
+import Boton from "../../UI/Botones/Boton";
 
 const BasicInfo = (props) => {
   let estilo = [classes.BasicInfo];

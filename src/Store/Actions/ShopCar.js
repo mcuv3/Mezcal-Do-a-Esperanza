@@ -21,42 +21,58 @@ export const fetchProductsInCartFail = (error) => {
   };
 };
 
-export const formatDataInCart = (calogoProducts, cartProducts) => {
-  // let productsToShop = [];
-  //     for (let key in calogoProducts) {
-  //       productsToShop.push(res.data[key]);
-  //     }
-  //dispatch(fetchProductsInCartSuccess(productsToShop));
-  return {};
+export const formatDataInCart = (
+  catalogProducts,
+  cartProducts,
+  isCatalogProductsArray
+) => {
+  return (dispatch) => {
+    let productsInCart = [];
+    console.log(cartProducts);
+
+    for (let productInCatalogKey in catalogProducts) {
+      for (let productInCartKey in cartProducts) {
+        if (
+          cartProducts[productInCartKey].id ===
+          (isCatalogProductsArray
+            ? catalogProducts[productInCatalogKey].id
+            : productInCatalogKey)
+        )
+          productsInCart.push({
+            id: cartProducts[productInCartKey].id,
+            cantidad: cartProducts[productInCartKey].cantidad,
+            ...catalogProducts[productInCatalogKey],
+          });
+      }
+    }
+
+    dispatch(fetchProductsInCartSuccess(productsInCart));
+  };
 };
 
-export const fetchProductsInCart = (catalogoProducts) => {
+export const fetchProductsInCart = (catalogProducts) => {
   return (dispatch) => {
+    dispatch(fetchProductsInCartStart());
     axios
       .get("/ShopProducts.json")
       .then((res) => {
-        console.log(res.data);
-        console.log(catalogoProducts);
-        if (catalogoProducts.length > 0) {
-          //dispatch(formatDataInCart(catalogoProducts, res.data));
+        if (catalogProducts.length > 0) {
+          dispatch(formatDataInCart(catalogProducts, res.data, true));
         } else {
-          let pro = axios
+          let productsInCart = res.data;
+          axios
             .get("/Products.json")
             .then((res) => {
-              //dispatch(formatDataInCart(res.data));
-              pro = res.data;
+              dispatch(formatDataInCart(res.data, productsInCart, false));
             })
             .catch((err) => {
-              // dispatch(onFailFetch(err));
+              dispatch(fetchProductsInCartFail(err));
             });
-          console.log(pro);
         }
       })
       .catch((error) => {
-        console.log(error);
-        //  dispatch(fetchProductsInCartFail(error));
+        dispatch(fetchProductsInCartFail(error));
       });
-    dispatch(fetchProductsInCartStart());
   };
 };
 

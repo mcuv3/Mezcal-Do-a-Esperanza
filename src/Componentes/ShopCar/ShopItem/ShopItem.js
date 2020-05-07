@@ -1,5 +1,5 @@
 import React from "react";
-import BasicInfo from "../../Catalogo/ProductoInfo/BasicInfo/BasicInfo";
+import BasicInfo from "../../Catalogo/BasicInfo/BasicInfo";
 
 const ShopItem = (props) => {
   return (

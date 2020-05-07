@@ -1,6 +1,6 @@
 import React from "react";
 
-import BasicInfo from "../ProductoInfo/BasicInfo/BasicInfo";
+import BasicInfo from "../BasicInfo/BasicInfo";
 
 const Producto = (props) => {
   return (
