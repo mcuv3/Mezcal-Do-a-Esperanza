@@ -8,10 +8,14 @@ import * as actions from "../../Store/Actions/Index";
 
 export class Catalogo extends Component {
   componentDidMount() {
-    this.props.fetchProduct();
+    this.props.fetchProducts();
+
     if (localStorage.getItem("productSelected") !== null) {
       const productSelected = localStorage.getItem("productSelected");
       this.selectProduct(JSON.parse(productSelected));
+    } else {
+      if (this.props.history.location.pathname.slice(10) !== "")
+        this.props.fetchProduct(this.props.history.location.pathname.slice(10));
     }
   }
 
@@ -21,14 +25,14 @@ export class Catalogo extends Component {
   };
 
   addProductToCart = (product) => {
-    this.props.onAddProductToCart({ id: product.id, cantidad: 1 });
+    this.props.onAddProductToCart({
+      ...product,
+      cantidad: 1,
+    });
     this.props.history.push("/shop-car");
-    console.log(product);
   };
 
   render() {
-    console.log(this.props.idSelected);
-
     let showProducts = (
       <React.Fragment>
         <ProductosControl />
@@ -62,9 +66,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onSelectProduct: (product) =>
       dispatch(actions.onSelectProductHandler(product)),
-    fetchProduct: () => dispatch(actions.fetchProductsFromDB()),
+    fetchProducts: () => dispatch(actions.fetchProductsFromDB()),
     onAddProductToCart: (product) =>
       dispatch(actions.addProductToCart(product)),
+    fetchProduct: (id) => dispatch(actions.fetchProduct(id)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Catalogo);

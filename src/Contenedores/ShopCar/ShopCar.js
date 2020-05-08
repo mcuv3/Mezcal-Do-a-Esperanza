@@ -1,28 +1,35 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ProductsToShop from "../../Componentes/ShopCar/ShopProduts";
-import ProductsToShopInfo from "../../Componentes/ShopCar/ShopInfo/ShopInfo";
 import * as actions from "../../Store/Actions/Index";
 
 export class ShopCar extends Component {
   componentDidMount() {
     this.props.onFetchProductsInCart(this.props.productsCatalgo);
-    console.log(this.props.productsCatalgo);
   }
 
+  changeCantidad = (id, operation) => {
+    this.props.onChangeQuantity(id, operation);
+  };
+  purchaseCart = () => {};
+  deleteProduct = (product) => this.props.onDeleteProduct(product);
+
   render() {
-    console.log(this.props.products);
     return (
       <div
         style={{
+          marginTop: "7em",
           display: "flex",
-          width: "85%",
           margin: "auto",
-          justifyContent: "space-between",
+          justifyContent: "center",
         }}
       >
-        <ProductsToShop productsToShop={this.props.productsInCart} />
-        <ProductsToShopInfo />
+        <ProductsToShop
+          productsToShop={this.props.productsInCart}
+          changeCantidad={this.changeCantidad}
+          Purchase={this.purchaseCart}
+          deleteProduct={this.deleteProduct}
+        />
       </div>
     );
   }
@@ -38,6 +45,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onFetchProductsInCart: (productsCatalgo) =>
       dispatch(actions.fetchProductsInCart(productsCatalgo)),
+    onDeleteProduct: (product) =>
+      dispatch(actions.removeProductFromCart(product)),
+    onChangeQuantity: (id, operation) =>
+      dispatch(actions.changeProductQuantity(id, operation)),
   };
 };
 

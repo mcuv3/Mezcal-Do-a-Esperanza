@@ -1,18 +1,36 @@
 import React from "react";
 import ShopItem from "./ShopItem/ShopItem";
+import classes from "./ShopProducts.css";
+import Boton from "../UI/Botones/Boton";
+import ShopInfo from "./ShopInfo/ShopInfo";
+import logo from "../../Assets/logo.png";
 
 function ShopProducts(props) {
   return (
-    <div>
+    <div className={classes.Checkout}>
+      <div className={classes.Cabeza}>
+        <div className={classes.LogoHead}>
+          <img src={logo} alt="logo" />
+          <p>Tu orden de</p>
+          <h3>Doña Esperanza</h3>
+        </div>
+      </div>
       {props.productsToShop.map((product) => {
         return (
           <ShopItem
             key={product.id + "Cart"}
             productToShop={product}
-            cantidad={product.cantidad}
+            deleteProduct={() => props.deleteProduct(product)}
+            changeCantidad={(operation) =>
+              props.changeCantidad(product.id, operation)
+            }
           />
         );
       })}
+      <ShopInfo />
+      <Boton type="CheckOut" click={props.Purchase}>
+        Checkout
+      </Boton>
     </div>
   );
 }

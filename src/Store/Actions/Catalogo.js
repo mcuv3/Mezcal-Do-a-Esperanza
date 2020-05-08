@@ -1,5 +1,6 @@
 import * as ActionTypes from "./ActionTypes";
 import axios from "../../axios-product";
+import * as actions from "./Index";
 
 export const onSelectProductHandler = (productSelected) => {
   return {
@@ -35,7 +36,14 @@ export const fetchProductsFromDB = () => {
         for (let key in res.data) {
           products.push({ id: key, ...res.data[key] });
         }
-        dispatch(onSuccessFetch(products));
+        axios
+          .get("/ShopProducts.json")
+          .then((res) => {
+            dispatch(actions.formatDataInCart(products, res.data, true, true));
+          })
+          .catch((err) => {
+            dispatch(onFailFetch(err));
+          });
       })
       .catch((err) => {
         dispatch(onFailFetch(err));

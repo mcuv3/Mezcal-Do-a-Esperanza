@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import classes from "./AddProducto.css";
 import { connect } from "react-redux";
 import * as actions from "../../../Store/Actions/Index";
-import axios from "axios";
 class AddProduct extends Component {
   state = {
     product: {
@@ -28,16 +27,6 @@ class AddProduct extends Component {
 
   addNewProduct = (event) => {
     event.preventDefault();
-    // const fd = new FormData();
-    // fd.append(
-    //   "image",
-    //   this.state.product.Imagen,
-    //   this.state.product.Imagen.name
-    // );
-
-    // axios.post("gs://mezacaleria-esperanza.appspot.com", fd).then((res) => {
-    //   console.log(res);
-    // });
     this.props.onAddProduct(this.state.product);
   };
 

@@ -42,7 +42,19 @@
   cursor: pointer;
   transform: scale(1.025);
 }
+.Carrito {
+  justify-content: center;
+  box-sizing: border-box;
+}
+.Carrito > .Texto {
+  box-sizing: border-box;
+}
 
+.Delete {
+  position: relative;
+  top: 10px;
+  right: 0;
+}
 @media (max-width: 500px) {
   .BasicInfo {
     flex-direction: column;

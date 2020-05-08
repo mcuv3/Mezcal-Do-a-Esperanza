@@ -11,13 +11,10 @@ class ProductoInfo extends Component {
 
   componentDidMount() {
     if (this.props.selectedProduct) {
-      console.log("LInk pasado alv");
       localStorage.setItem(
         "productSelected",
         JSON.stringify(this.props.selectedProduct)
       );
-    } else {
-      console.log("LInk pasado alv");
     }
   }
   componentWillUnmount() {
@@ -36,7 +33,7 @@ class ProductoInfo extends Component {
   };
   addProductToCart = () => {
     this.props.onAddProductToCart({
-      id: this.props.selectedProduct.id,
+      ...this.props.selectedProduct,
       cantidad: this.state.cantidad,
     });
   };
@@ -55,7 +52,6 @@ class ProductoInfo extends Component {
           page="catalogo-item"
           addToCart={this.addProductToCart}
         />
-
         <p className={classes.Cuerpo}>
           {this.props.selectedProduct.Descripcion}
         </p>

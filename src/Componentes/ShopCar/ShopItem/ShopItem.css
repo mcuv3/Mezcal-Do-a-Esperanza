@@ -1,0 +1,67 @@
+.ShopItem {
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 3px #eee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5em;
+  width: 500px;
+  height: 40px;
+}
+.MoreInfo {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+  width: 500px;
+  background-color: rgba(163, 163, 163, 0.171);
+  margin-bottom: 0.5em;
+}
+.MoreInfo > p {
+  padding: 0 1em;
+  font-style: italic;
+  text-align: justify;
+}
+.Count {
+  font-size: 20px;
+  width: 65px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Count > i {
+  font-size: 15px;
+}
+.Count > i:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+.Precio {
+  font-style: italic;
+  margin: 0 12px 0 35px;
+}
+
+.More {
+  box-sizing: border-box;
+  position: relative;
+  left: 0;
+  height: 100%;
+  width: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background-color: rgba(163, 163, 163, 0.328);
+}
+.More > i {
+  transition: transform ease 0.25s;
+}
+.More > i:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+.Delete {
+  position: relative;
+  top: 20px;
+  left: 0;
+}

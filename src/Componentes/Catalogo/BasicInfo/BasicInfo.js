@@ -10,19 +10,36 @@ const BasicInfo = (props) => {
   switch (props.page) {
     case "catalogo":
       estilo.push(classes.Catalogo);
+      newBotones = (
+        <Boton
+          type="registrate"
+          click={props.addToCart}
+          disabled={props.producto.isInCar}
+        >
+          {props.producto.isInCar ? "En Carrito" : "Agregar al Carrito"}
+        </Boton>
+      );
       break;
     case "catalogo-item":
       estilo.push(classes.Item);
       newBotones = (
-        <div className={classes.Cantidad}>
-          <button onClick={props.less}>-</button>
-          <p> {props.cantidad} </p>
-          <button onClick={props.add}>+</button>
-        </div>
+        <React.Fragment>
+          <div className={classes.Cantidad}>
+            <button onClick={props.less}>-</button>
+            <p> {props.cantidad} </p>
+            <button onClick={props.add}>+</button>
+          </div>
+          <Boton
+            type="registrate"
+            click={props.addToCart}
+            disabled={props.producto.isInCar}
+          >
+            {props.producto.isInCar ? "En Carrito" : "Agregar al Carrito"}
+          </Boton>
+        </React.Fragment>
       );
       break;
-    case "carrito":
-      estilo.push(classes.Carrito);
+    default:
       break;
   }
   return (
@@ -38,13 +55,10 @@ const BasicInfo = (props) => {
         <h3 onClick={props.click}>{props.producto.Nombre}</h3>
         <div className={classes.Detalles} onClick={props.click}>
           <p> Seccion: {props.producto.seccion}</p>
-          <p>Tipo: {props.producto.tipo} </p>
+          <p> Tipo: {props.producto.tipo} </p>
         </div>
         <p onClick={props.click}>${props.producto.Precio}</p>
         {newBotones}
-        <Boton type="registrate" click={props.addToCart}>
-          Agregar al Carrito
-        </Boton>
       </div>
     </div>
   );

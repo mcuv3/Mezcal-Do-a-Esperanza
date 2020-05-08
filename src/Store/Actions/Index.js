@@ -1,4 +1,5 @@
 export {
+  onSuccessFetch,
   onSelectProductHandler,
   onUnSelectProduct,
   onAddNewProduct,
@@ -7,6 +8,8 @@ export {
 } from "./Catalogo";
 export {
   addProductToCart,
-  removeProductToCart,
+  removeProductFromCart,
   fetchProductsInCart,
+  formatDataInCart,
+  changeProductQuantity,
 } from "./ShopCar";

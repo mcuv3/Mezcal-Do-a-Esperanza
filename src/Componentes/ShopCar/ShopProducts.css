@@ -1,0 +1,28 @@
+.Checkout {
+  margin-top: 3em;
+  border: 1px solid #ccc;
+  box-sizing: 0 2px 3px #eee;
+  padding: 1em 2em;
+  margin-bottom: 2em;
+  transition: all ease 0.1s;
+  width: 500px;
+}
+.Checkout:hover {
+  box-shadow: 0 4px 6px #eee;
+}
+.Cabeza {
+  background-color: black;
+  position: relative;
+  margin: -1em -2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  margin-bottom: 8em;
+}
+.LogoHead {
+  position: relative;
+  line-height: 10px;
+  text-align: center;
+  top: 70px;
+}

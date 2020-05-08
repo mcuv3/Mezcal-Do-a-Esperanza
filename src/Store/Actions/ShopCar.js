@@ -1,22 +1,24 @@
-import * as actions from "../Actions/ActionTypes";
+import * as ActionTypes from "./ActionTypes";
 import axios from "../../axios-product";
+import * as actions from "./Index";
 
 //FETCH PRODUCT IN CART
 
-export const fetchProductsInCartStart = () => {
+export const transactionStart = () => {
   return {
-    type: actions.FETCH_PRODUCTS_IN_CART_START,
+    type: ActionTypes.TRANSACTION_START,
   };
 };
+
 export const fetchProductsInCartSuccess = (productsToShop) => {
   return {
-    type: actions.FETCH_PRODUCTS_IN_CART_SUCCESS,
+    type: ActionTypes.FETCH_PRODUCTS_IN_CART_SUCCESS,
     productsToShop,
   };
 };
 export const fetchProductsInCartFail = (error) => {
   return {
-    type: actions.FETCH_PRODUCTS_IN_CART_FAIL,
+    type: ActionTypes.FETCH_PRODUCTS_IN_CART_FAIL,
     error,
   };
 };
@@ -24,12 +26,11 @@ export const fetchProductsInCartFail = (error) => {
 export const formatDataInCart = (
   catalogProducts,
   cartProducts,
-  isCatalogProductsArray
+  isCatalogProductsArray,
+  fetchedFromCatalog
 ) => {
   return (dispatch) => {
-    let productsInCart = [];
-    console.log(cartProducts);
-
+    let products = [];
     for (let productInCatalogKey in catalogProducts) {
       for (let productInCartKey in cartProducts) {
         if (
@@ -37,22 +38,34 @@ export const formatDataInCart = (
           (isCatalogProductsArray
             ? catalogProducts[productInCatalogKey].id
             : productInCatalogKey)
-        )
-          productsInCart.push({
-            id: cartProducts[productInCartKey].id,
-            cantidad: cartProducts[productInCartKey].cantidad,
-            ...catalogProducts[productInCatalogKey],
-          });
+        ) {
+          var isInCar = null;
+          fetchedFromCatalog
+            ? (isInCar = true)
+            : products.push({
+                id: cartProducts[productInCartKey].id,
+                cartId: productInCartKey,
+                cantidad: cartProducts[productInCartKey].cantidad,
+                ...catalogProducts[productInCatalogKey],
+              });
+        }
       }
+      if (fetchedFromCatalog) {
+        isInCar
+          ? products.push({ ...catalogProducts[productInCatalogKey], isInCar })
+          : products.push({ ...catalogProducts[productInCatalogKey] });
+      }
+      isInCar = null;
     }
 
-    dispatch(fetchProductsInCartSuccess(productsInCart));
+    if (!fetchedFromCatalog) dispatch(fetchProductsInCartSuccess(products));
+    else dispatch(actions.onSuccessFetch(products));
   };
 };
 
 export const fetchProductsInCart = (catalogProducts) => {
   return (dispatch) => {
-    dispatch(fetchProductsInCartStart());
+    dispatch(transactionStart());
     axios
       .get("/ShopProducts.json")
       .then((res) => {
@@ -78,27 +91,22 @@ export const fetchProductsInCart = (catalogProducts) => {
 
 //ADD PRODUCT TO CART
 
-export const addProductToCartStart = () => {
-  return {
-    type: actions.ADD_PRODUCT_TO_CART_START,
-  };
-};
 export const addProductToCartSuccess = (product) => {
   return {
-    type: actions.ADD_PRODUCT_TO_CART_SUCCESS,
+    type: ActionTypes.ADD_PRODUCT_TO_CART_SUCCESS,
     product,
   };
 };
 export const addProductToCartFail = (error) => {
   return {
-    type: actions.ADD_PRODUCT_TO_CART_FAIL,
+    type: ActionTypes.ADD_PRODUCT_TO_CART_FAIL,
     error,
   };
 };
 
 export const addProductToCart = (product) => {
   return (dispatch) => {
-    dispatch(addProductToCartStart());
+    dispatch(transactionStart());
     axios
       .post("/ShopProducts.json", product)
       .then((res) => {
@@ -112,20 +120,38 @@ export const addProductToCart = (product) => {
 
 //REMOVE PRODUCT FROM CART
 
-export const removeProductToCartSuccess = (product) => {
+export const removeProductFromCartSuccess = (id) => {
   return {
-    type: actions.ADD_PRODUCT_TO_CART_SUCCESS,
-    product,
+    type: ActionTypes.REMOVE_PRODUCT_FROM_CART_SUCCESS,
+    id,
   };
 };
-export const removeProductToCartFail = (error) => {
+export const removeProductFromCartFail = (error) => {
   return {
-    type: actions.ADD_PRODUCT_TO_CART_FAIL,
+    type: ActionTypes.REMOVE_PRODUCT_FROM_CART_FAIL,
     error,
   };
 };
-export const removeProductToCart = (product) => {
+export const removeProductFromCart = (product) => {
   return (dispatch) => {
-    //Remove Product From Cart
+    dispatch(transactionStart());
+    axios
+      .delete("/ShopProducts/" + product.cartId + ".json")
+      .then((res) => {
+        dispatch(removeProductFromCartSuccess(product.id));
+      })
+      .catch((error) => {
+        dispatch(removeProductFromCartFail(error));
+      });
+  };
+};
+
+//Change Product Quantity
+
+export const changeProductQuantity = (id, operation) => {
+  return {
+    type: ActionTypes.CHANGE_PRODUCT_QUANTITY,
+    id,
+    operation,
   };
 };
