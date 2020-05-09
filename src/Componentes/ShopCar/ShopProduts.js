@@ -27,7 +27,7 @@ function ShopProducts(props) {
           />
         );
       })}
-      <ShopInfo />
+      <ShopInfo products={props.productsToShop} />
       <Boton type="CheckOut" click={props.Purchase}>
         Checkout
       </Boton>

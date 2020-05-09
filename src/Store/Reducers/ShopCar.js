@@ -57,8 +57,6 @@ const reducer = (state = InitialState, action) => {
         error: action.error,
       };
     case ActionTypes.CHANGE_PRODUCT_QUANTITY:
-      const productsToShop = [...state.productsToShop];
-
       return {
         ...state,
         productsToShop: state.productsToShop.map((p) => {

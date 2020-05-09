@@ -55,7 +55,9 @@ export const fetchProduct = (id) => {
     axios
       .get("/Products/" + id + ".json")
       .then((res) => {
-        dispatch(onSelectProductHandler({ id, ...res.data }));
+        res.data
+          ? dispatch(onSelectProductHandler({ id, ...res.data }))
+          : dispatch(onFailFetch(true));
       })
       .catch((err) => {
         dispatch(onFailFetch(err));

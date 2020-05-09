@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import classes from "./ShopItem.css";
-// import Imagen from "../../UI/Image/Image";
-// import ProductImage from "../../../Assets/producto.png";
 
 class ShopItem extends Component {
   state = {
@@ -35,7 +33,11 @@ class ShopItem extends Component {
               onClick={() => this.props.changeCantidad(false)}
             ></i>
           </div>
-          <p className={classes.Precio}>${this.props.productToShop.Precio}</p>
+          <p className={classes.Precio}>
+            $
+            {this.props.productToShop.Precio *
+              this.props.productToShop.cantidad}
+          </p>
 
           <div className={classes.More} style={{ backgroundColor: "#d17878" }}>
             <i
@@ -48,12 +50,6 @@ class ShopItem extends Component {
           className={classes.MoreInfo}
           style={{ display: this.state.show ? "flex" : "none" }}
         >
-          {/* <Imagen
-            Alt="imagen"
-            url={ProductImage}
-            width="200px"
-            height="150px"
-          /> */}
           <p>{this.props.productToShop.Descripcion.slice(0, 150)} ....</p>
         </div>
       </div>

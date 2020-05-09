@@ -5,45 +5,18 @@ import ImgProducto from "../../../Assets/producto.png";
 import Boton from "../../UI/Botones/Boton";
 
 const BasicInfo = (props) => {
-  let estilo = [classes.BasicInfo];
   let newBotones = null;
-  switch (props.page) {
-    case "catalogo":
-      estilo.push(classes.Catalogo);
-      newBotones = (
-        <Boton
-          type="registrate"
-          click={props.addToCart}
-          disabled={props.producto.isInCar}
-        >
-          {props.producto.isInCar ? "En Carrito" : "Agregar al Carrito"}
-        </Boton>
-      );
-      break;
-    case "catalogo-item":
-      estilo.push(classes.Item);
-      newBotones = (
-        <React.Fragment>
-          <div className={classes.Cantidad}>
-            <button onClick={props.less}>-</button>
-            <p> {props.cantidad} </p>
-            <button onClick={props.add}>+</button>
-          </div>
-          <Boton
-            type="registrate"
-            click={props.addToCart}
-            disabled={props.producto.isInCar}
-          >
-            {props.producto.isInCar ? "En Carrito" : "Agregar al Carrito"}
-          </Boton>
-        </React.Fragment>
-      );
-      break;
-    default:
-      break;
+  if (props.page === "catalogo-item") {
+    newBotones = (
+      <div className={classes.Cantidad}>
+        <button onClick={props.less}>-</button>
+        <p> {props.cantidad} </p>
+        <button onClick={props.add}>+</button>
+      </div>
+    );
   }
   return (
-    <div className={estilo.join(" ")}>
+    <div className={[classes.BasicInfo, classes[props.page]].join(" ")}>
       <Imagen
         Alt={props.producto.Nombre}
         url={ImgProducto}
@@ -59,6 +32,13 @@ const BasicInfo = (props) => {
         </div>
         <p onClick={props.click}>${props.producto.Precio}</p>
         {newBotones}
+        <Boton
+          type="registrate"
+          click={props.addToCart}
+          disabled={props.producto.isInCar}
+        >
+          {props.producto.isInCar ? "En Carrito" : "Agregar al Carrito"}
+        </Boton>
       </div>
     </div>
   );

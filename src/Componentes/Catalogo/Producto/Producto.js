@@ -8,7 +8,7 @@ const Producto = (props) => {
       imageWidth="100%"
       imageHeight="300px"
       producto={props.producto}
-      page="catalogo"
+      page="Catalogo"
       click={props.selected}
       addToCart={props.addToCart}
     />

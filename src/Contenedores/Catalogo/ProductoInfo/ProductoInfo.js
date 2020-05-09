@@ -17,6 +17,7 @@ class ProductoInfo extends Component {
       );
     }
   }
+
   componentWillUnmount() {
     localStorage.removeItem("productSelected");
     this.props.onUnSelectProduct();
@@ -32,10 +33,7 @@ class ProductoInfo extends Component {
     });
   };
   addProductToCart = () => {
-    this.props.onAddProductToCart({
-      ...this.props.selectedProduct,
-      cantidad: this.state.cantidad,
-    });
+    this.props.addProduct(this.props.selectedProduct, this.state.cantidad);
   };
 
   render() {
@@ -63,16 +61,12 @@ class ProductoInfo extends Component {
 const mapStateToProps = (state) => {
   return {
     selectedProduct: state.catalogo.productSelected,
-    products: state.catalogo.products,
+    error: state.catalogo.error,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     onUnSelectProduct: () => dispatch(actions.onUnSelectProduct()),
-    onSelectedProduct: (id) => dispatch(actions.onSelectProductHandler(id)),
-    onAddProductToCart: (product) =>
-      dispatch(actions.addProductToCart(product)),
-    fetchProduct: (id) => dispatch(actions.fetchProduct(id)),
   };
 };
 

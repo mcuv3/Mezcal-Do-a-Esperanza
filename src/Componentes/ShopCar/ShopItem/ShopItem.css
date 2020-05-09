@@ -28,6 +28,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: static;
+  right: calc(100% - 60%);
 }
 .Count > i {
   font-size: 15px;
