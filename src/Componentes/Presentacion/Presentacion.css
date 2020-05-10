@@ -1,44 +1,30 @@
 .Presentacion {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 500px;
   box-sizing: border-box;
 }
 .back {
   width: 100%;
-  height: 800px;
+  height: 100%;
+  object-fit: cover;
 }
 .Contenido {
   position: absolute;
-  top: 50px;
+  top: 100px;
+  left: 100px;
   padding: 1em;
   line-height: 30px;
   color: rgb(0, 0, 0);
   width: 80%;
 }
 .Contenido > p {
-  color: #0a0a0aa9;
+  color: #ffffffc4;
   font-style: italic;
   font-size: 25px;
 }
 
-@media (min-width: 2000px) {
-  .back {
-    height: 1200px;
-  }
+@media (max-width: 675px) {
   .Contenido {
-    top: 20%;
-  }
-}
-
-@media (max-width: 800px) {
-  .back {
-    height: 800px;
-  }
-}
-
-@media (max-width: 500px) {
-  .back {
-    height: 500px;
+    left: 20px;
   }
 }

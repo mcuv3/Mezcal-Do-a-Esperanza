@@ -24,6 +24,13 @@
   text-align: justify;
 }
 
+.BackButton {
+  position: absolute;
+  top: 2em;
+  left: 1em;
+  font-size: 2em;
+}
+
 @media (max-width: 500px) {
   .ProductInfo {
     width: 100%;

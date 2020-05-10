@@ -38,22 +38,26 @@ class ProductoInfo extends Component {
 
   render() {
     return (
-      <div className={classes.ProductInfo}>
-        <div className={classes.BackButton}>Back</div>
-        <BasicInfo
-          imageWidth="300px"
-          imageHeight="300px"
-          producto={this.props.selectedProduct}
-          cantidad={this.state.cantidad}
-          add={() => this.changeCantidad(1)}
-          less={() => this.changeCantidad(0)}
-          page="catalogo-item"
-          addToCart={this.addProductToCart}
-        />
-        <p className={classes.Cuerpo}>
-          {this.props.selectedProduct.Descripcion}
-        </p>
-      </div>
+      <React.Fragment>
+        <div className={classes.BackButton}>
+          <i class="far fa-arrow-alt-circle-left"></i>
+        </div>
+        <div className={classes.ProductInfo}>
+          <BasicInfo
+            imageWidth="300px"
+            imageHeight="300px"
+            producto={this.props.selectedProduct}
+            cantidad={this.state.cantidad}
+            add={() => this.changeCantidad(1)}
+            less={() => this.changeCantidad(0)}
+            page="catalogo-item"
+            addToCart={this.addProductToCart}
+          />
+          <p className={classes.Cuerpo}>
+            {this.props.selectedProduct.Descripcion}
+          </p>
+        </div>
+      </React.Fragment>
     );
   }
 }

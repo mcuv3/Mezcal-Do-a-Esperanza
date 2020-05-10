@@ -1,0 +1,20 @@
+.Modal {
+  width: 40%;
+  margin: auto;
+  z-index: 100;
+  min-height: 300px;
+  width: 700px;
+  display: flex;
+  padding: 0;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+}
+.Controls {
+  position: relative;
+  height: 30px;
+  width: 100%;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px solid rgba(0, 0, 0, 0.568);
+  background-color: rgb(124, 124, 124);
+}

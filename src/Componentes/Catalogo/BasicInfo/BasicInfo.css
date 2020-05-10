@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  box-shadow: 0 20px 10px -15px rgba(197, 192, 249, 0.2);
 }
 .Texto {
   flex: 1;
@@ -41,6 +42,7 @@
 .Catalogo:hover {
   cursor: pointer;
   transform: scale(1.025);
+  box-shadow: 0 20px 10px -15px rgba(197, 192, 249, 0.2);
 }
 .Carrito {
   justify-content: center;

@@ -1,0 +1,8 @@
+.OrderSummary {
+  display: flex;
+  flex-direction: column;
+}
+
+.Success {
+  text-align: center;
+}

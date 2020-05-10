@@ -5,8 +5,14 @@ import { connect } from "react-redux";
 import { Route } from "react-router-dom";
 import ProductInfo from "./ProductoInfo/ProductoInfo";
 import * as actions from "../../Store/Actions/Index";
+import Modal from "../../Componentes/UI/Modal/Modal";
+import OrderSummary from "../../Componentes/CheckOut/OrderSummary/OrderSummary";
+import Spinner from "../../Componentes/UI/Spinner/Spinner";
 
 export class Catalogo extends Component {
+  state = {
+    show: false,
+  };
   componentDidMount() {
     if (localStorage.getItem("productSelected") !== null) {
       const productSelected = localStorage.getItem("productSelected");
@@ -39,8 +45,12 @@ export class Catalogo extends Component {
       ...product,
       cantidad: cant ? cant : 1,
     });
+    this.props.onSelectProduct(product);
+    this.setState({ show: true });
     //this.props.history.push("/shop-car");
   };
+
+  close_open_Modal = (show) => this.setState({ show });
 
   render() {
     let showProducts = (
@@ -70,7 +80,21 @@ export class Catalogo extends Component {
       return (
         <h1 style={{ textAlign: "center" }}>Oups, Something went wrong</h1>
       );
-    return showProducts;
+    return (
+      <React.Fragment>
+        {showProducts}
+        <Modal
+          show={this.state.show}
+          close={() => this.close_open_Modal(false)}
+        >
+          {this.props.loading ? (
+            <Spinner />
+          ) : (
+            <OrderSummary product={this.props.selectProduct} />
+          )}
+        </Modal>
+      </React.Fragment>
+    );
   }
 }
 const mapStateToProps = (state) => {
@@ -79,6 +103,7 @@ const mapStateToProps = (state) => {
     selectedProduct: state.catalogo.productSelected,
     showProductInfo: state.catalogo.showProductInfo,
     error: state.catalogo.error,
+    loading: state.shopcart.loading,
   };
 };
 
