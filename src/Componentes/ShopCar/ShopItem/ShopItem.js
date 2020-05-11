@@ -10,7 +10,7 @@ class ShopItem extends Component {
   };
   render() {
     return (
-      <div>
+      <React.Fragment>
         <div className={classes.ShopItem}>
           <div className={classes.More}>
             <i
@@ -52,7 +52,7 @@ class ShopItem extends Component {
         >
           <p>{this.props.productToShop.Descripcion.slice(0, 150)} ....</p>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

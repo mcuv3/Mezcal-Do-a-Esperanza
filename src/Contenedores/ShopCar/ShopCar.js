@@ -29,6 +29,7 @@ export class ShopCar extends Component {
           changeCantidad={this.changeCantidad}
           Purchase={this.purchaseCart}
           deleteProduct={this.deleteProduct}
+          loading={this.props.loading}
         />
       </div>
     );
@@ -39,6 +40,7 @@ const mapStateToProps = (state) => {
   return {
     productsInCart: state.shopcart.productsToShop,
     productsCatalgo: state.catalogo.products,
+    loading: state.shopcart.loading,
   };
 };
 const mapDispatchToProps = (dispatch) => {

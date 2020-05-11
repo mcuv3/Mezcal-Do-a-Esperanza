@@ -1,15 +1,12 @@
 import React from "react";
 import back from "../../Assets/back.jpg";
 import classes from "./Presentacion.css";
-import Boton from "../UI/Botones/BotonNav";
+import Boton from "../UI/Botones/Boton";
 
 const Presentacion = () => {
   return (
     <React.Fragment>
-      <div
-        className={classes.Presentacion}
-        // style={{ backgroundImage: `url(${back})` }}
-      >
+      <div className={classes.Presentacion}>
         <div className={classes.Contenido}>
           <h1>El mejor mezcal de todo mexico</h1>
           <p>

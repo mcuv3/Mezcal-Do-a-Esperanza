@@ -1,8 +1,14 @@
 .OrderSummary {
   display: flex;
   flex-direction: column;
-}
-
-.Success {
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  line-height: 40px;
+  padding: 1em 2em;
+}
+.OrderSummary > p {
+  font-style: italic;
+  font-size: 30px;
+  color: #0000008e;
 }

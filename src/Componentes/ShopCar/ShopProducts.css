@@ -1,7 +1,7 @@
 .Checkout {
   margin-top: 3em;
   border: 1px solid #ccc;
-  box-sizing: 0 2px 3px #eee;
+  box-shadow: 0 2px 3px #eee;
   padding: 1em 2em;
   margin-bottom: 2em;
   transition: all ease 0.1s;
@@ -22,7 +22,7 @@
 }
 .LogoHead {
   position: relative;
-  line-height: 10px;
+  line-height: 20px;
   text-align: center;
-  top: 70px;
+  top: 60px;
 }

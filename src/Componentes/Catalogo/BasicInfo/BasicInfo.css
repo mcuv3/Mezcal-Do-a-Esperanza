@@ -3,20 +3,26 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  box-shadow: 0 20px 10px -15px rgba(197, 192, 249, 0.2);
 }
 .Texto {
   flex: 1;
   display: flex;
   flex-direction: column;
   text-align: center;
+  line-height: 25px;
   justify-content: center;
   align-items: center;
   padding: 1em;
+  height: 100%;
 }
+
 .Cantidad {
-  display: flex;
-  margin-bottom: 1em;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  font-size: 17px;
+  margin: 0.5em 0;
+  font-weight: bold;
 }
 .Cantidad > p {
   margin: 0 0.5em;
@@ -25,38 +31,11 @@
   font-style: italic;
 }
 .Detalles {
-  margin: 0;
-  line-height: 4px;
+  margin: 1em 0;
   font-style: italic;
   color: rgba(0, 0, 0, 0.445);
 }
 
-.Catalogo {
-  flex-direction: column;
-  justify-content: center;
-  border: solid 1px #ccc;
-  box-shadow: 0 1px 2px #eee;
-  transition: transform ease 0.5s;
-  height: 600px;
-}
-.Catalogo:hover {
-  cursor: pointer;
-  transform: scale(1.025);
-  box-shadow: 0 20px 10px -15px rgba(197, 192, 249, 0.2);
-}
-.Carrito {
-  justify-content: center;
-  box-sizing: border-box;
-}
-.Carrito > .Texto {
-  box-sizing: border-box;
-}
-
-.Delete {
-  position: relative;
-  top: 10px;
-  right: 0;
-}
 @media (max-width: 500px) {
   .BasicInfo {
     flex-direction: column;

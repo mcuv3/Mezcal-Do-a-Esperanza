@@ -6,7 +6,7 @@ const Producto = (props) => {
   return (
     <BasicInfo
       imageWidth="100%"
-      imageHeight="300px"
+      imageHeight="200px"
       producto={props.producto}
       page="Catalogo"
       click={props.selected}

@@ -24,7 +24,6 @@ export class Catalogo extends Component {
         this.props.fetchProducts();
       }
     }
-    console.log("err");
   }
   componentDidUpdate() {
     if (
@@ -40,17 +39,17 @@ export class Catalogo extends Component {
   };
 
   addProductToCart = (product, cant) => {
-    console.log(product, cant);
     this.props.onAddProductToCart({
       ...product,
       cantidad: cant ? cant : 1,
     });
-    this.props.onSelectProduct(product);
     this.setState({ show: true });
-    //this.props.history.push("/shop-car");
   };
 
-  close_open_Modal = (show) => this.setState({ show });
+  close_open_Modal = (show) => {
+    this.setState({ show });
+    this.props.fetchProducts();
+  };
 
   render() {
     let showProducts = (
@@ -80,6 +79,7 @@ export class Catalogo extends Component {
       return (
         <h1 style={{ textAlign: "center" }}>Oups, Something went wrong</h1>
       );
+
     return (
       <React.Fragment>
         {showProducts}

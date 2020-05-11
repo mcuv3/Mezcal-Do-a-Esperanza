@@ -40,7 +40,7 @@ class ProductoInfo extends Component {
     return (
       <React.Fragment>
         <div className={classes.BackButton}>
-          <i class="far fa-arrow-alt-circle-left"></i>
+          <i className="far fa-arrow-alt-circle-left"></i>
         </div>
         <div className={classes.ProductInfo}>
           <BasicInfo
