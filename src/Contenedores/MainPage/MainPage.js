@@ -34,7 +34,7 @@ export class MainPage extends Component {
           width="100%"
           height="350px"
           images={images}
-          bgColor="#ff0"
+          bgColor="#fff"
         />
         <BestSellers
           products={this.props.BestSellersProducts}

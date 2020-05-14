@@ -13,13 +13,13 @@ const ProductosControl = (props) => {
     <div className={classes.Controls}>
       <Search />
       <ul className={classes.NavigationItems}>
-        <div>
+        <div className={classes.Seleccion}>
           Secciones
-          {/* <i
+          <i
             className="fas fa-caret-down"
-             onClick={this.showDropDownToggle}
-             onMouseEnter={this.showDropDownToggle}
-          ></i> */}
+            // onClick={this.showDropDownToggle}
+            // onMouseEnter={this.showDropDownToggle}
+          ></i>
         </div>
 
         {/* <DropDown links={links} /> */}
