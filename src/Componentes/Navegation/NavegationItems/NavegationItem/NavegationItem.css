@@ -1,10 +1,10 @@
-.NavegatioItem {
+.NavigationItem {
   padding: 0.6em 0.2em;
   font-size: 20px;
   text-decoration: none;
   color: black;
 }
-.NavegatioItem:hover {
+.NavigationItem:hover {
   background-color: #9790902a;
   cursor: pointer;
   box-shadow: 0 3px 0 rgba(0, 0, 0, 0.76);

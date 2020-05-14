@@ -3,6 +3,12 @@
   height: 500px;
   box-sizing: border-box;
 }
+.BackDrop {
+  position: absolute;
+  width: 100%;
+  height: 500px;
+  background-color: rgba(0, 0, 0, 0.287);
+}
 .back {
   width: 100%;
   height: 100%;

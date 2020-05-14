@@ -34,7 +34,7 @@ function ShopProducts(props) {
           );
         })
       )}
-      <ShopInfo products={props.productsToShop} />
+      <ShopInfo cartPriceSummary={props.cartPriceSummary} />
       <Boton
         type="CheckOut"
         click={props.Purchase}

@@ -5,7 +5,12 @@ function Image(props) {
     <img
       alt={props.Alt}
       src={props.url}
-      style={{ width: props.width, height: props.height, objectFit: "cover" }}
+      style={{
+        width: props.width,
+        height: props.height,
+        objectFit: "cover",
+        ...props.styleImg,
+      }}
       onClick={props.click}
     />
   );

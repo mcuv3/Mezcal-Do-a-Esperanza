@@ -66,7 +66,7 @@ const BasicInfo = (props) => {
               click={props.addToCart}
               disabled={props.producto.isInCar}
             >
-              <i class="fas fa-shopping-cart"></i>
+              <i className="fas fa-shopping-cart"></i>
             </Boton>
           </div>
         </div>

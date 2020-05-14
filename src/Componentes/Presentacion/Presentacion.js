@@ -6,6 +6,7 @@ import Boton from "../UI/Botones/Boton";
 const Presentacion = () => {
   return (
     <React.Fragment>
+      <div className={classes.BackDrop}></div>
       <div className={classes.Presentacion}>
         <div className={classes.Contenido}>
           <h1>El mejor mezcal de todo mexico</h1>

@@ -3,12 +3,15 @@ import * as ActionTypes from "../Actions/ActionTypes";
 const InitialState = {
   userId: "",
   productsToShop: [],
-  addProductSuccess: false,
-  total: "",
-  subTotal: "",
-  iva: "",
+  cartPriceSummary: {
+    total: 0,
+    subTotal: 0,
+    iva: 0,
+    shipping: 2,
+  },
   error: null,
   loading: false,
+  addProductSuccess: false,
 };
 
 const reducer = (state = InitialState, action) => {
@@ -23,6 +26,12 @@ const reducer = (state = InitialState, action) => {
         ...state,
         loading: false,
         productsToShop: action.productsToShop,
+        cartPriceSummary: {
+          ...state.cartPriceSummary,
+          subTotal: action.total,
+          iva: action.total * 0.16,
+          total: (action.total * 1.16 + 2).toFixed(2),
+        },
       };
     case ActionTypes.FETCH_PRODUCTS_IN_CART_FAIL:
       return {

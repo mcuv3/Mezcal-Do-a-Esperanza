@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import classes from "./ShopItem.css";
+import { Transition } from "react-transition-group";
 
 class ShopItem extends Component {
   state = {
@@ -46,12 +47,26 @@ class ShopItem extends Component {
             ></i>
           </div>
         </div>
-        <div
-          className={classes.MoreInfo}
-          style={{ display: this.state.show ? "flex" : "none" }}
-        >
-          <p>{this.props.productToShop.Descripcion.slice(0, 150)} ....</p>
-        </div>
+        <Transition in={this.state.show} timeout={500}>
+          {(state) => (
+            <div
+              className={classes.MoreInfo}
+              style={{
+                transition: "all 0.5s ease",
+                marginTop: state === "exited" ? "-0px" : null,
+                height:
+                  state === "entering"
+                    ? "100px"
+                    : state === "entered"
+                    ? "100px"
+                    : "0",
+                opacity: state === "entered" ? "1" : 0,
+              }}
+            >
+              <p>{this.props.productToShop.Descripcion.slice(0, 150)} ....</p>
+            </div>
+          )}
+        </Transition>
       </React.Fragment>
     );
   }

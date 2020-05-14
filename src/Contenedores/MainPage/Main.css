@@ -1,0 +1,9 @@
+.slide {
+  width: 100%;
+}
+
+@media (max-width: 500px) {
+  .slide {
+    width: 30%;
+  }
+}

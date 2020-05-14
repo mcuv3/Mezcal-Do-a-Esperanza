@@ -1,0 +1,13 @@
+.Input {
+  width: 250px;
+}
+
+.Input > input {
+  border: 0.5px solid black;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.PlaceHolder {
+  font-family: FontAwesome;
+}

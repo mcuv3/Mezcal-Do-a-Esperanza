@@ -10,10 +10,11 @@ export const transactionStart = () => {
   };
 };
 
-export const fetchProductsInCartSuccess = (productsToShop) => {
+export const fetchProductsInCartSuccess = (productsToShop, total) => {
   return {
     type: ActionTypes.FETCH_PRODUCTS_IN_CART_SUCCESS,
     productsToShop,
+    total,
   };
 };
 export const fetchProductsInCartFail = (error) => {
@@ -58,8 +59,14 @@ export const formatDataInCart = (
       isInCar = null;
     }
 
-    if (!fetchedFromCatalog) dispatch(fetchProductsInCartSuccess(products));
-    else dispatch(actions.onSuccessFetch(products));
+    if (!fetchedFromCatalog) {
+      const total = products.reduce(
+        (acc, product) => acc + product.cantidad * product.Precio,
+        0
+      );
+
+      dispatch(fetchProductsInCartSuccess(products, total));
+    } else dispatch(actions.onSuccessFetch(products));
   };
 };
 

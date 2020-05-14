@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./ToolBar.css";
 import NavigationItems from "../NavegationItems/NavegationItems";
+import NavigationItem from "../NavegationItems/NavegationItem/NavegationItem";
 import Logo from "../logo/logo";
 import Menu from "../menu/menu";
 const ToolBar = (props) => {
@@ -13,6 +14,9 @@ const ToolBar = (props) => {
       <div className={classes.desktopOnly}>
         <NavigationItems />
       </div>
+      <NavigationItem path="/shop-car">
+        <i className="fas fa-shopping-cart"></i>
+      </NavigationItem>
     </div>
   );
 };

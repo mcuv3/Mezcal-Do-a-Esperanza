@@ -1,0 +1,18 @@
+.About {
+  display: flex;
+  width: 100%;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  background-color: #ecf0ef;
+  padding: 2em 0;
+}
+.Text {
+  width: 50%;
+  text-align: center;
+  margin: auto;
+}
+.Text > p {
+  margin: 1em 0;
+  text-align: justify;
+}

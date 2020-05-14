@@ -3,8 +3,10 @@ import classes from "./NavegationItem.css";
 import { NavLink } from "react-router-dom";
 
 const NavegationItem = (props) => {
+  let style = classes.NavigationItem;
+  if (props.noStyle) style = "";
   return (
-    <NavLink className={classes.NavegatioItem} to={props.path}>
+    <NavLink className={style} to={props.path}>
       {props.children}
     </NavLink>
   );

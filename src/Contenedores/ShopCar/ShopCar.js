@@ -11,7 +11,12 @@ export class ShopCar extends Component {
   changeCantidad = (id, operation) => {
     this.props.onChangeQuantity(id, operation);
   };
-  purchaseCart = () => {};
+  purchaseCart = () => {
+    console.log({
+      productsSold: this.props.productsInCart,
+      ticket: this.props.cartPriceSummary,
+    });
+  };
   deleteProduct = (product) => this.props.onDeleteProduct(product);
 
   render() {
@@ -27,6 +32,7 @@ export class ShopCar extends Component {
         <ProductsToShop
           productsToShop={this.props.productsInCart}
           changeCantidad={this.changeCantidad}
+          cartPriceSummary={this.props.cartPriceSummary}
           Purchase={this.purchaseCart}
           deleteProduct={this.deleteProduct}
           loading={this.props.loading}
@@ -38,6 +44,7 @@ export class ShopCar extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    cartPriceSummary: state.shopcart.cartPriceSummary,
     productsInCart: state.shopcart.productsToShop,
     productsCatalgo: state.catalogo.products,
     loading: state.shopcart.loading,
