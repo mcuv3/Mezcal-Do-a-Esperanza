@@ -1,6 +1,5 @@
 import * as ActionTypes from "./ActionTypes";
 import axios from "../../axios-product";
-import * as actions from "./Index";
 
 export const onSelectProductHandler = (productSelected) => {
   return {
@@ -14,12 +13,6 @@ export const onUnSelectProduct = () => {
   };
 };
 
-export const onSuccessFetch = (products) => {
-  return {
-    type: ActionTypes.FETCH_PRODUCTS_SUCCESS,
-    products,
-  };
-};
 export const onFailFetch = (error) => {
   return {
     type: ActionTypes.FETCH_PRODUCTS_FAIL,
@@ -27,29 +20,61 @@ export const onFailFetch = (error) => {
   };
 };
 
-export const fetchProductsFromDB = () => {
+export const filterProductsSuccess = (products) => {
+  return {
+    type: ActionTypes.FILTER_PRODUCTS,
+    products,
+  };
+};
+
+export const formatProductsInCatalog = (filterCatalog, cart) => {
   return (dispatch) => {
-    axios
-      .get("/Products.json")
-      .then((res) => {
-        let products = [];
-        for (let key in res.data) {
-          products.push({ id: key, ...res.data[key] });
+    let products = [];
+    for (let productId in filterCatalog) {
+      for (let productCart in cart) {
+        if (cart[productCart].id === productId) {
+          var inCart = true;
+          break;
         }
-        axios
-          .get("/ShopProducts.json")
-          .then((res) => {
-            dispatch(actions.formatDataInCart(products, res.data, true, true));
+      }
+      inCart
+        ? products.push({
+            id: productId,
+            isInCar: true,
+            ...filterCatalog[productId],
           })
-          .catch((err) => {
-            dispatch(onFailFetch(err));
-          });
-      })
-      .catch((err) => {
-        dispatch(onFailFetch(err));
+        : products.push({ id: productId, ...filterCatalog[productId] });
+      inCart = false;
+    }
+    const numberOfPages = Math.ceil(products.length / 9);
+    const newProducts = [];
+    for (let i = 0; i < numberOfPages; i++) {
+      newProducts.push([]);
+      for (let a = 0; a < 9; a++)
+        products.length > 0 && newProducts[i].push(products.pop());
+    }
+
+    dispatch(filterProductsSuccess(newProducts));
+  };
+};
+
+export const filterProducts = (productName, filterByName) => {
+  const uf8ff = "\uf8ff";
+  return (dispatch) => {
+    let url;
+    filterByName
+      ? (url = `/Products.json?orderBy="Nombre"&startAt="${productName}"&endAt="${productName}${uf8ff}"`)
+      : (url = `/Products.json?orderBy="seccion"&equalTo="${productName}"`);
+    const products = axios.get(url).then((res) => res.data);
+    const cart = axios.get("/ShopProducts.json").then((res) => res.data);
+    Promise.all([products, cart])
+      .then((values) => dispatch(formatProductsInCatalog(values[0], values[1])))
+      .catch((error) => {
+        dispatch(onFailFetch(error));
       });
   };
 };
+
 export const fetchProduct = (id) => {
   return (dispatch) => {
     axios
@@ -69,11 +94,16 @@ export const onAddNewProduct = (product) => {
   return (dispatch) => {
     axios
       .post("/Products.json", product)
-      .then((res) => {
-        dispatch(fetchProductsFromDB());
-      })
+      .then((res) => {})
       .catch((error) => {
         console.log(error);
       });
+  };
+};
+
+export const onChangePageCatalog = (direction) => {
+  return {
+    type: ActionTypes.CHANGE_PAGE_CATALOG,
+    direction,
   };
 };

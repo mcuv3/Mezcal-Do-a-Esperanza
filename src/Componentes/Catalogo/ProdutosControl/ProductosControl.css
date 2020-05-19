@@ -25,3 +25,13 @@
 .Seleccion > i:hover {
   cursor: pointer;
 }
+
+@media (max-width: 500px) {
+  .Controls {
+    flex-direction: column;
+    width: 300px;
+  }
+  .Seleccion {
+    margin-top: 1em;
+  }
+}

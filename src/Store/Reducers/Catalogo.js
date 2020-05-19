@@ -2,7 +2,8 @@ import * as actionTypes from "../Actions/ActionTypes";
 
 const initialState = {
   productSelected: [],
-  products: [],
+  products: [[]],
+  page: 0,
   showProductInfo: false,
   error: false,
 };
@@ -18,7 +19,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.UNSELECT_PRODUCT:
       return {
         ...state,
-        productSelected: "-",
+        productSelected: [],
         showProductInfo: false,
       };
     case actionTypes.FETCH_PRODUCTS_SUCCESS:
@@ -31,6 +32,17 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         error: true,
+      };
+    case actionTypes.FILTER_PRODUCTS:
+      return {
+        ...state,
+        products: action.products.length === 0 ? [[]] : action.products,
+        page: 0,
+      };
+    case actionTypes.CHANGE_PAGE_CATALOG:
+      return {
+        ...state,
+        page: action.direction ? state.page + 1 : state.page - 1,
       };
     default:
       return state;

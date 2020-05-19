@@ -1,0 +1,14 @@
+.Count {
+  font-size: 20px;
+  width: 65px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Count > i {
+  font-size: 15px;
+}
+.Count > i:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}

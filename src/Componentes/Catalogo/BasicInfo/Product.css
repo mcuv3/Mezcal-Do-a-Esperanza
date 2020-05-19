@@ -16,24 +16,18 @@
   height: 100%;
 }
 
-.Cantidad {
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-  font-size: 17px;
-  margin: 0.5em 0;
-  font-weight: bold;
-}
-.Cantidad > p {
-  margin: 0 0.5em;
-  font-size: 25px;
-  font-weight: bold;
-  font-style: italic;
-}
 .Detalles {
   margin: 1em 0;
   font-style: italic;
   color: rgba(0, 0, 0, 0.445);
+}
+
+.Mensaje {
+  margin-top: 3em;
+  padding: 5px 10px;
+  border: 1px solid #095236;
+  background-color: #91c37a;
+  border-radius: 25px;
 }
 
 @media (max-width: 500px) {

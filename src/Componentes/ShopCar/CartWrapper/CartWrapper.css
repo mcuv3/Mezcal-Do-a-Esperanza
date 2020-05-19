@@ -26,3 +26,9 @@
   text-align: center;
   top: 60px;
 }
+
+@media (max-width: 500px) {
+  .Checkout {
+    width: 400px;
+  }
+}

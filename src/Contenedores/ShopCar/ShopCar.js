@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import ProductsToShop from "../../Componentes/ShopCar/ShopProduts";
+import CheckOut from "../../Componentes/ShopCar/ShopProduts";
 import * as actions from "../../Store/Actions/Index";
 
 export class ShopCar extends Component {
   componentDidMount() {
-    this.props.onFetchProductsInCart(this.props.productsCatalgo);
+    this.props.onFetchProductsInCart();
   }
 
   changeCantidad = (id, operation) => {
@@ -29,7 +29,7 @@ export class ShopCar extends Component {
           justifyContent: "center",
         }}
       >
-        <ProductsToShop
+        <CheckOut
           productsToShop={this.props.productsInCart}
           changeCantidad={this.changeCantidad}
           cartPriceSummary={this.props.cartPriceSummary}
@@ -46,14 +46,12 @@ const mapStateToProps = (state) => {
   return {
     cartPriceSummary: state.shopcart.cartPriceSummary,
     productsInCart: state.shopcart.productsToShop,
-    productsCatalgo: state.catalogo.products,
     loading: state.shopcart.loading,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFetchProductsInCart: (productsCatalgo) =>
-      dispatch(actions.fetchProductsInCart(productsCatalgo)),
+    onFetchProductsInCart: () => dispatch(actions.fetchProductsInCart()),
     onDeleteProduct: (product) =>
       dispatch(actions.removeProductFromCart(product)),
     onChangeQuantity: (id, operation) =>

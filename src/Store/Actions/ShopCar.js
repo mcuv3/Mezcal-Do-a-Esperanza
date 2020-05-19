@@ -1,6 +1,5 @@
 import * as ActionTypes from "./ActionTypes";
 import axios from "../../axios-product";
-import * as actions from "./Index";
 
 //FETCH PRODUCT IN CART
 
@@ -24,75 +23,39 @@ export const fetchProductsInCartFail = (error) => {
   };
 };
 
-export const formatDataInCart = (
-  catalogProducts,
-  cartProducts,
-  isCatalogProductsArray,
-  fetchedFromCatalog
-) => {
+export const formatDataInCart = (catalogProducts, cartProducts) => {
   return (dispatch) => {
     let products = [];
     for (let productInCatalogKey in catalogProducts) {
       for (let productInCartKey in cartProducts) {
-        if (
-          cartProducts[productInCartKey].id ===
-          (isCatalogProductsArray
-            ? catalogProducts[productInCatalogKey].id
-            : productInCatalogKey)
-        ) {
-          var isInCar = null;
-          fetchedFromCatalog
-            ? (isInCar = true)
-            : products.push({
-                id: cartProducts[productInCartKey].id,
-                cartId: productInCartKey,
-                cantidad: cartProducts[productInCartKey].cantidad,
-                ...catalogProducts[productInCatalogKey],
-              });
+        if (cartProducts[productInCartKey].id === productInCatalogKey) {
+          products.push({
+            id: cartProducts[productInCartKey].id,
+            cartId: productInCartKey,
+            cantidad: cartProducts[productInCartKey].cantidad,
+            ...catalogProducts[productInCatalogKey],
+          });
         }
       }
-      if (fetchedFromCatalog) {
-        isInCar
-          ? products.push({ ...catalogProducts[productInCatalogKey], isInCar })
-          : products.push({ ...catalogProducts[productInCatalogKey] });
-      }
-      isInCar = null;
     }
-
-    if (!fetchedFromCatalog) {
-      const total = products.reduce(
-        (acc, product) => acc + product.cantidad * product.Precio,
-        0
-      );
-
-      dispatch(fetchProductsInCartSuccess(products, total));
-    } else dispatch(actions.onSuccessFetch(products));
+    const total = products.reduce(
+      (acc, product) => acc + product.cantidad * product.Precio,
+      0
+    );
+    dispatch(fetchProductsInCartSuccess(products, total));
   };
 };
 
-export const fetchProductsInCart = (catalogProducts) => {
+export const fetchProductsInCart = () => {
   return (dispatch) => {
     dispatch(transactionStart());
-    axios
-      .get("/ShopProducts.json")
-      .then((res) => {
-        if (catalogProducts.length > 0) {
-          dispatch(formatDataInCart(catalogProducts, res.data, true));
-        } else {
-          let productsInCart = res.data;
-          axios
-            .get("/Products.json")
-            .then((res) => {
-              dispatch(formatDataInCart(res.data, productsInCart, false));
-            })
-            .catch((err) => {
-              dispatch(fetchProductsInCartFail(err));
-            });
-        }
+    const cart = axios.get("/ShopProducts.json").then((res) => res.data);
+    const allProducts = axios.get("/Products.json").then((res) => res.data);
+    Promise.all([allProducts, cart])
+      .then((promises) => {
+        dispatch(formatDataInCart(promises[0], promises[1]));
       })
-      .catch((error) => {
-        dispatch(fetchProductsInCartFail(error));
-      });
+      .catch((error) => dispatch(fetchProductsInCartFail(error)));
   };
 };
 

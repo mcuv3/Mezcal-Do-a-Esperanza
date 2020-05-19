@@ -1,0 +1,36 @@
+.Pages {
+  display: flex;
+  padding: 0.2rem 1.5rem;
+  width: 200px;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+}
+.page {
+  margin: 0 0.5em;
+  font-size: 30px;
+  font-style: italic;
+  font-weight: bold;
+}
+.next,
+.prev {
+  font-size: 14px;
+  color: rgb(100, 100, 100);
+  border: none;
+  background-color: transparent;
+}
+
+.next:disabled,
+.prev:disabled {
+  color: rgb(194, 194, 194);
+}
+.next:disabled:hover,
+.prev:disabled:hover {
+  cursor: default;
+}
+
+.next:hover,
+.prev:hover {
+  cursor: pointer;
+}

@@ -1,10 +1,10 @@
 export {
-  onSuccessFetch,
   onSelectProductHandler,
   onUnSelectProduct,
   onAddNewProduct,
-  fetchProductsFromDB,
   fetchProduct,
+  filterProducts,
+  onChangePageCatalog,
 } from "./Catalogo";
 export {
   addProductToCart,

@@ -13,7 +13,7 @@ import Location from "../../Componentes/MainPage/Location/Location";
 
 export class MainPage extends Component {
   componentDidMount() {
-    this.props.fetchProducts();
+    this.props.onFilterProduct("");
   }
   goToProduct = (product) => {
     this.props.history.push("/catalogo/" + product.id);
@@ -47,13 +47,17 @@ export class MainPage extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    BestSellersProducts: state.catalogo.products.slice(0, 3),
+    BestSellersProducts: state.catalogo.products[state.catalogo.page].slice(
+      0,
+      3
+    ),
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchProducts: () => dispatch(actions.fetchProductsFromDB()),
+    onFilterProduct: (productName) =>
+      dispatch(actions.filterProducts(productName, true)),
   };
 };
 

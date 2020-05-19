@@ -8,6 +8,7 @@ import * as actions from "../../Store/Actions/Index";
 import Modal from "../../Componentes/UI/Modal/Modal";
 import OrderSummary from "../../Componentes/CheckOut/OrderSummary/OrderSummary";
 import Spinner from "../../Componentes/UI/Spinner/Spinner";
+import NavPages from "../../Componentes/Catalogo/NavPages/NavPages";
 
 export class Catalogo extends Component {
   state = {
@@ -19,22 +20,54 @@ export class Catalogo extends Component {
       this.selectProduct(JSON.parse(productSelected));
     } else {
       if (this.props.history.location.pathname.slice(10) !== "") {
-        this.props.fetchProduct(this.props.history.location.pathname.slice(10));
-      } else {
-        this.props.fetchProducts();
+        switch (this.props.history.location.pathname.slice(10)) {
+          case "Mezcal":
+          case "Sabor":
+          case "Licor":
+          case "Sal y Salsas":
+          case "Otros":
+            localStorage.setItem(
+              "Seccion",
+              this.props.history.location.pathname.slice(10)
+            );
+            this.props.onFilterBySection(
+              this.props.history.location.pathname.slice(10),
+              false
+            );
+            break;
+          default:
+            this.props.fetchProduct(
+              this.props.history.location.pathname.slice(10)
+            );
+            break;
+        }
       }
     }
   }
   componentDidUpdate() {
     if (
-      this.props.products.length === 0 &&
-      this.props.history.location.pathname.slice(10) === ""
-    )
-      this.props.fetchProducts();
+      this.props.history.location.pathname.slice(10) !== "" &&
+      localStorage.getItem("Seccion") !==
+        this.props.history.location.pathname.slice(10)
+    ) {
+      if (this.props.selectedProduct.length === 0) {
+        localStorage.setItem(
+          "Seccion",
+          this.props.history.location.pathname.slice(10)
+        );
+        this.props.onFilterBySection(
+          this.props.history.location.pathname.slice(10),
+          false
+        );
+      }
+    }
   }
+  componentWillUnmount() {
+    localStorage.removeItem("Seccion");
+  }
+
   selectProduct = (product) => {
     this.props.onSelectProduct(product);
-
     this.props.history.push("/catalogo/" + product.id);
   };
 
@@ -48,18 +81,29 @@ export class Catalogo extends Component {
 
   close_open_Modal = (show) => {
     this.setState({ show });
-    this.props.fetchProducts();
+    this.props.onFilterBySection("", true);
   };
 
   render() {
     let showProducts = (
       <React.Fragment>
         <ProductosControl />
-        <Productos
-          productos={this.props.products}
-          selected={this.selectProduct}
-          addToCart={this.addProductToCart}
-        />
+        {this.props.products.length === 0 ? (
+          <h1 style={{ textAlign: "center" }}>Oops, no tenemos ese producto</h1>
+        ) : (
+          <React.Fragment>
+            <Productos
+              productos={this.props.products}
+              selected={this.selectProduct}
+              addToCart={this.addProductToCart}
+            />
+            <NavPages
+              page={+this.props.page}
+              change={(direction) => this.props.onChangePage(direction)}
+              maxPage={this.props.maxPage}
+            />
+          </React.Fragment>
+        )}
       </React.Fragment>
     );
     if (this.props.showProductInfo) {
@@ -76,9 +120,7 @@ export class Catalogo extends Component {
       );
     }
     if (this.props.error)
-      return (
-        <h1 style={{ textAlign: "center" }}>Oups, Something went wrong</h1>
-      );
+      return <h1 style={{ textAlign: "center" }}>Oops, Algo salió mal</h1>;
 
     return (
       <React.Fragment>
@@ -99,7 +141,9 @@ export class Catalogo extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    products: state.catalogo.products,
+    products: state.catalogo.products[state.catalogo.page],
+    maxPage: state.catalogo.products.length,
+    page: state.catalogo.page,
     selectedProduct: state.catalogo.productSelected,
     showProductInfo: state.catalogo.showProductInfo,
     error: state.catalogo.error,
@@ -111,10 +155,13 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onSelectProduct: (product) =>
       dispatch(actions.onSelectProductHandler(product)),
-    fetchProducts: () => dispatch(actions.fetchProductsFromDB()),
     onAddProductToCart: (product) =>
       dispatch(actions.addProductToCart(product)),
     fetchProduct: (id) => dispatch(actions.fetchProduct(id)),
+    onFilterBySection: (seccion, isSearch) =>
+      dispatch(actions.filterProducts(seccion, isSearch)),
+    onChangePage: (direction) =>
+      dispatch(actions.onChangePageCatalog(direction)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Catalogo);

@@ -3,6 +3,7 @@ import classes from "./ProductoInfo.css";
 import { connect } from "react-redux";
 import * as actions from "../../../Store/Actions/Index";
 import BasicInfo from "../../../Componentes/Catalogo/BasicInfo/BasicInfo";
+import { withRouter } from "react-router-dom";
 
 class ProductoInfo extends Component {
   state = {
@@ -37,10 +38,14 @@ class ProductoInfo extends Component {
   };
 
   render() {
+    console.log(this.props);
     return (
-      <React.Fragment>
-        <div className={classes.BackButton}>
-          <i className="far fa-arrow-alt-circle-left"></i>
+      <div className={classes.Container}>
+        <div
+          className={classes.BackButton}
+          onClick={() => this.props.history.goBack()}
+        >
+          <i className="fas fa-long-arrow-alt-left"></i>
         </div>
         <div className={classes.ProductInfo}>
           <BasicInfo
@@ -48,8 +53,9 @@ class ProductoInfo extends Component {
             imageHeight="300px"
             producto={this.props.selectedProduct}
             cantidad={this.state.cantidad}
-            add={() => this.changeCantidad(1)}
-            less={() => this.changeCantidad(0)}
+            changeCantidad={this.changeCantidad}
+            // add={() => this.changeCantidad(1)}
+            // less={() => this.changeCantidad(0)}
             page="catalogo-item"
             addToCart={this.addProductToCart}
           />
@@ -57,7 +63,7 @@ class ProductoInfo extends Component {
             {this.props.selectedProduct.Descripcion}
           </p>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
@@ -74,4 +80,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductoInfo);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(ProductoInfo));

@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./Style.css";
 import Logo from "../Navegation/logo/logo";
+import { Link } from "react-router-dom";
 
 const Footer = (props) => {
   return (
@@ -15,17 +16,25 @@ const Footer = (props) => {
           </h3>
 
           <p className={classes["footer-links"]}>
-            <a href="#" className={classes["link-1"]}>
+            <Link to="/" href="#" className={classes["link-1"]}>
               Home
-            </a>
+            </Link>
 
-            <a href="#">Blog</a>
+            <Link to="/" href="#">
+              Blog
+            </Link>
 
-            <a href="#">Precios</a>
+            <Link to="/" href="#">
+              Precios
+            </Link>
 
-            <a href="#">Acerca De</a>
+            <Link to="/" href="#">
+              Acerca De
+            </Link>
 
-            <a href="#">FAQ</a>
+            <Link to="/" href="#">
+              FAQ
+            </Link>
           </p>
 
           <p className={classes["footer-company-name"]}>
@@ -34,7 +43,9 @@ const Footer = (props) => {
           <p className={classes["footer-company-name"]}>
             Powered by React, developed by{" "}
             <strong>
-              <a href="https://github.com/MauricioAntonioMartinez">mcuve</a>
+              <Link to="/" href="https://github.com/MauricioAntonioMartinez">
+                mcuve
+              </Link>
             </strong>
           </p>
         </div>
@@ -55,9 +66,9 @@ const Footer = (props) => {
           <div>
             <i className={classes["fa fa-envelope"]}></i>
             <p>
-              <a href="mailto:support@company.com">
+              <Link to="/" href="mailto:support@company.com">
                 info@mezcaldoñaesperanza.com
-              </a>
+              </Link>
             </p>
           </div>
         </div>
@@ -70,18 +81,18 @@ const Footer = (props) => {
           </p>
 
           <div className={classes["footer-icons"]}>
-            <a href="#">
+            <Link to="/" href="#">
               <i className="fa fa-facebook"></i>
-            </a>
-            <a href="#">
+            </Link>
+            <Link to="/" href="#">
               <i className="fa fa-twitter"></i>
-            </a>
-            <a href="#">
+            </Link>
+            <Link to="/" href="#">
               <i className="fa fa-linkedin"></i>
-            </a>
-            <a href="#">
+            </Link>
+            <Link to="/" href="#">
               <i className="fa fa-github"></i>
-            </a>
+            </Link>
           </div>
         </div>
       </footer>

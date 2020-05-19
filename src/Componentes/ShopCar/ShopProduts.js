@@ -1,21 +1,13 @@
 import React from "react";
 import ShopItem from "./ShopItem/ShopItem";
-import classes from "./ShopProducts.css";
 import Boton from "../UI/Botones/Boton";
 import ShopInfo from "./ShopInfo/ShopInfo";
-import logo from "../../Assets/logo.png";
+import CartWrapper from "./CartWrapper/CartWrapper";
 import Spinner from "../UI/Spinner/Spinner";
 
 function ShopProducts(props) {
   return (
-    <div className={classes.Checkout}>
-      <div className={classes.Cabeza}>
-        <div className={classes.LogoHead}>
-          <img src={logo} alt="logo" />
-          <p>Tu orden de</p>
-          <h3>Doña Esperanza</h3>
-        </div>
-      </div>
+    <CartWrapper>
       {props.loading ? (
         <div style={{ position: "relative", right: "-42%" }}>
           <Spinner />
@@ -42,7 +34,7 @@ function ShopProducts(props) {
       >
         Checkout
       </Boton>
-    </div>
+    </CartWrapper>
   );
 }
 
