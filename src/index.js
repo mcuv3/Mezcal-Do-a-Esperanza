@@ -7,6 +7,10 @@ import ShopCartReducer from "./Store/Reducers/ShopCar";
 import thunk from "redux-thunk";
 import "./index.css";
 import App from "./App";
+import createSagaMiddleware from "redux-saga";
+import { watchCatalogo, watchShopCart } from "./Store/Sagas/index";
+
+const sagaMiddleware = createSagaMiddleware();
 
 const rootReducers = combineReducers({
   catalogo: CatalogoReducer,
@@ -20,8 +24,11 @@ const composeEnhancers =
 
 const store = createStore(
   rootReducers,
-  composeEnhancers(applyMiddleware(thunk))
+  composeEnhancers(applyMiddleware(thunk, sagaMiddleware))
 );
+sagaMiddleware.run(watchCatalogo);
+sagaMiddleware.run(watchShopCart);
+
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>

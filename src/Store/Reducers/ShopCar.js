@@ -21,6 +21,12 @@ const reducer = (state = InitialState, action) => {
         ...state,
         loading: true,
       };
+    case ActionTypes.TRANSACTION_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
     case ActionTypes.FETCH_PRODUCTS_IN_CART_SUCCESS:
       return {
         ...state,
@@ -33,23 +39,12 @@ const reducer = (state = InitialState, action) => {
           total: (action.total * 1.16 + 2).toFixed(2),
         },
       };
-    case ActionTypes.FETCH_PRODUCTS_IN_CART_FAIL:
-      return {
-        ...state,
-        loading: false,
-        error: action.error,
-      };
+
     case ActionTypes.ADD_PRODUCT_TO_CART_SUCCESS:
       return {
         ...state,
         loading: false,
         addProductSuccess: true,
-      };
-    case ActionTypes.ADD_PRODUCT_TO_CART_FAIL:
-      return {
-        ...state,
-        loading: false,
-        error: action.error,
       };
     case ActionTypes.REMOVE_PRODUCT_FROM_CART_SUCCESS:
       return {
@@ -58,12 +53,6 @@ const reducer = (state = InitialState, action) => {
         productsToShop: state.productsToShop.filter(
           (product) => product.id !== action.id
         ),
-      };
-    case ActionTypes.REMOVE_PRODUCT_FROM_CART_FAIL:
-      return {
-        ...state,
-        loading: false,
-        error: action.error,
       };
     case ActionTypes.CHANGE_PRODUCT_QUANTITY:
       return {

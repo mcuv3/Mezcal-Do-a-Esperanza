@@ -10,6 +10,7 @@ const ShopItem = (props) => {
     opacity: show ? 1 : 0,
     height: show ? "85px" : "0px",
   });
+  console.log(show);
   return (
     <React.Fragment>
       <div className={classes.ShopItem}>

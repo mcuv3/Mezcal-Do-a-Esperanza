@@ -7,7 +7,7 @@ const NavegatioDropDown = (props) => {
     <ul className={classes.NavigationDropDown}>
       {props.links.map((link) => {
         return (
-          <li key={link.text} onClick={props.clicked}>
+          <li key={link.text}>
             <NavigationItem path={link.path} noStyle>
               {link.text}
             </NavigationItem>

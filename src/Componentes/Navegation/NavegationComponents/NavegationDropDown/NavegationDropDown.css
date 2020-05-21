@@ -24,7 +24,7 @@
 
 @media (max-width: 500px) {
   .NavigationDropDown {
-    position: static;
-    width: 100%;
+    position: relative;
+    width: auto;
   }
 }

@@ -22,18 +22,12 @@ const reducer = (state = initialState, action) => {
         productSelected: [],
         showProductInfo: false,
       };
-    case actionTypes.FETCH_PRODUCTS_SUCCESS:
-      return {
-        ...state,
-        products: action.products,
-        error: false,
-      };
-    case actionTypes.FETCH_PRODUCTS_FAIL:
+    case actionTypes.FILTER_PRODUCTS_FAIL:
       return {
         ...state,
         error: true,
       };
-    case actionTypes.FILTER_PRODUCTS:
+    case actionTypes.FILTER_PRODUCTS_SUCCESS:
       return {
         ...state,
         products: action.products.length === 0 ? [[]] : action.products,

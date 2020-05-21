@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./ShopInfo.css";
-const ShopInfo = (props) => {
+const ShopInfo = React.memo((props) => {
   return (
     <div className={classes.Concepts}>
       <div className={classes.Concept}>
@@ -17,6 +17,6 @@ const ShopInfo = (props) => {
       </div>
     </div>
   );
-};
+});
 
 export default ShopInfo;

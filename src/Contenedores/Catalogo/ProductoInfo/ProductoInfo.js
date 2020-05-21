@@ -35,10 +35,10 @@ class ProductoInfo extends Component {
   };
   addProductToCart = () => {
     this.props.addProduct(this.props.selectedProduct, this.state.cantidad);
+    this.props.history.push("/catalogo");
   };
 
   render() {
-    console.log(this.props);
     return (
       <div className={classes.Container}>
         <div
