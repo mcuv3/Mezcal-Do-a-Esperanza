@@ -109,7 +109,8 @@ export class Catalogo extends Component {
     if (this.props.showProductInfo) {
       showProducts = (
         <Route
-          path={this.props.match.path + "/" + this.props.selectedProduct.id}
+          path={this.props.match.path + "/:id"}
+          exact
           component={() => (
             <ProductInfo
               addProduct={this.addProductToCart}

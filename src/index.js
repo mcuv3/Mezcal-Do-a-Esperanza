@@ -16,11 +16,10 @@ const rootReducers = combineReducers({
   catalogo: CatalogoReducer,
   shopcart: ShopCartReducer,
 });
-
 const composeEnhancers =
-  process.env.NODE_ENV === "development"
+  (process.env.NODE_ENV === "development"
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    : null || compose;
+    : null) || compose;
 
 const store = createStore(
   rootReducers,

@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import CheckOut from "../../Componentes/ShopCar/ShopProduts";
 import * as actions from "../../Store/Actions/Index";
+import UserInfo from "./UserInfo/UserInfo";
 
 export class ShopCar extends Component {
+  state = {
+    page: 1,
+  };
+
   componentDidMount() {
     this.props.onFetchProductsInCart();
   }
@@ -12,6 +17,7 @@ export class ShopCar extends Component {
     this.props.onChangeQuantity(id, operation);
   };
   purchaseCart = () => {
+    this.setState({ page: this.state.page + 1 });
     console.log({
       productsSold: this.props.productsInCart,
       ticket: this.props.cartPriceSummary,
@@ -20,6 +26,26 @@ export class ShopCar extends Component {
   deleteProduct = (product) => this.props.onDeleteProduct(product);
 
   render() {
+    let page;
+    switch (this.state.page) {
+      case 2:
+        page = <UserInfo />;
+        break;
+
+      default:
+        page = (
+          <CheckOut
+            productsToShop={this.props.productsInCart}
+            changeCantidad={this.changeCantidad}
+            cartPriceSummary={this.props.cartPriceSummary}
+            Purchase={this.purchaseCart}
+            deleteProduct={this.deleteProduct}
+            loading={this.props.loading}
+          />
+        );
+        break;
+    }
+
     return (
       <div
         style={{
@@ -29,14 +55,7 @@ export class ShopCar extends Component {
           justifyContent: "center",
         }}
       >
-        <CheckOut
-          productsToShop={this.props.productsInCart}
-          changeCantidad={this.changeCantidad}
-          cartPriceSummary={this.props.cartPriceSummary}
-          Purchase={this.purchaseCart}
-          deleteProduct={this.deleteProduct}
-          loading={this.props.loading}
-        />
+        {page}
       </div>
     );
   }

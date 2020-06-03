@@ -38,11 +38,11 @@ const ShopItem = (props) => {
           <i className="fas fa-backspace" onClick={props.deleteProduct}></i>
         </div>
       </div>
-      <animated.div style={sty}>
+      {/* <animated.div style={sty}>
         <div className={classes.MoreInfo}>
           <p>{props.productToShop.Descripcion.slice(0, 150)} ....</p>
         </div>
-      </animated.div>
+      </animated.div> */}
     </React.Fragment>
   );
 };
