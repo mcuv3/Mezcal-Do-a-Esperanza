@@ -1,8 +1,18 @@
 .Info {
   display: flex;
   flex-direction: column;
-  text-align: center;
   margin: auto;
   padding: 5px 10px;
   border: 1px solid #eee;
+  text-align: center;
+  width: 550px;
+}
+
+.cp {
+  margin-bottom: 1em;
+}
+
+.payPalButton {
+  margin: auto;
+  width: 200px;
 }

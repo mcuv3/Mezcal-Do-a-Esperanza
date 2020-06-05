@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CartWrapper from "../../../Componentes/ShopCar/CartWrapper/CartWrapper";
 import Input from "../../../Componentes/UI/Input/Input";
 import Boton from "../../../Componentes/UI/Botones/Boton";
-import classes from "./UserInfo.css";
+import { withRouter } from "react-router-dom";
 import Modal from "../../../Componentes/UI/Modal/Modal";
 import CheckOut from "../../../Componentes/CheckOut/CheckOut";
 
@@ -88,6 +88,11 @@ const UserInfo = (props) => {
     setOrder(userData);
     console.log(userData);
   };
+  const placed = () => {
+    setTimeout(() => {
+      props.history.push("/");
+    }, 2000);
+  };
 
   const changeInput = (e, field) => {
     e.preventDefault();
@@ -126,10 +131,10 @@ const UserInfo = (props) => {
       </form>
 
       <Modal show={modal} close={() => setModal(!modal)}>
-        {orderPlaced && <CheckOut userData={orderPlaced} />}
+        {orderPlaced && <CheckOut userData={orderPlaced} placed={placed} />}
       </Modal>
     </CartWrapper>
   );
 };
 
-export default UserInfo;
+export default withRouter(UserInfo);

@@ -7,19 +7,22 @@ const Presentacion = () => {
   return (
     <React.Fragment>
       <div className={classes.BackDrop}></div>
-      <div className={classes.Presentacion}>
+      <div
+        className={classes.Presentacion}
+        style={{ backgroundImage: `url(${back})` }}
+      >
         <div className={classes.Contenido}>
           <h1>El mejor mezcal de todo mexico</h1>
           <p>
             "Para todo mal mezcal para todo bien tambien y si no hay remedio
             litro y medio."
           </p>
-          <div>
+          {/* <div>
             <Boton type="registrate">Registrate</Boton>
             <Boton type="logeate">Inicia Sesion</Boton>
-          </div>
+          </div> */}
         </div>
-        <img src={back} alt="img" className={classes.back} />
+        {/* <img src={back} alt="img" className={classes.back} /> */}
       </div>
     </React.Fragment>
   );

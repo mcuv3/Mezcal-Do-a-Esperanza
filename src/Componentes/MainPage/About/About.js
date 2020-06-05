@@ -8,17 +8,25 @@ function About() {
       <div className={classes.About}>
         <div className={classes.Text}>
           <Logo width="200px" height="200px" />
-          <h1>Somos Mezacales Dona Esperanza</h1>
+          <h1>Somos Mezacales Doña Esperanza</h1>
 
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non amet
-            ipsa totam aut perspiciatis pariatur! Enim est quas, quae sit
-            veritatis itaque reiciendis ut, repellat molestiae eum eaque
-            voluptatem, quasi ab distinctio sapiente laborum velit similique.
-            Quod distinctio asperiores sapiente, eveniet saepe error inventore,
-            tenetur adipisci fugit, assumenda nobis aliquid. Voluptates numquam
-            nemo libero laboriosam ipsa, quam quibusdam, ullam error, quaerat
-            rem unde eos magnam mollitia perferendis at incidunt. Saepe ullam v
+            Somos una sociedad conformada por productores rurales y nos
+            dedicamos a la producción y comercialización de mezcales
+            tradicionales oaxaqueños de diversas regiones y variedades del
+            estado de Oaxaca.
+          </p>
+          <p>
+            Compartimos la cultura y tradición de los diferentes agaves, donde
+            con un concepto ecléctico fusionamos el arte y el mezcal en un
+            espacio para degustar una amplia variedad de mezcales silvestres.
+          </p>
+
+          <p>
+            El conocimiento es algo que no se aprende de un día para otro;
+            debido a esto en esta sección podrás encontrar y acceder a
+            información referente a diferentes temas de interés en torno a la
+            cultura maguey-mezcal.
           </p>
         </div>
       </div>
